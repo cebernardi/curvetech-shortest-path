@@ -1,5 +1,7 @@
 package curvetech;
 
+import curvetech.source.IGitHubSource;
+
 public class GitHub {
 	
 	private IGitHubSource source;

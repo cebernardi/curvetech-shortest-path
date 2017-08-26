@@ -3,6 +3,7 @@ package curvetech.server;
 import static spark.Spark.*;
 
 import curvetech.GitHub;
+import curvetech.source.GitHubDemoSource;
 
 public class Main {
 
@@ -10,11 +11,13 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		gitHub = new GitHub();
+		GitHubDemoSource source = new GitHubDemoSource();
 		
-		 get("/hello/:user", (req, res) -> helloWorld(req.params("user")));
+		gitHub = new GitHub(source);
+		
+		get("/hello/:user", (req, res) -> helloWorld(req.params("user")));
 		 		 
-		 get("/path/:user1/:user2", (req, res) -> gitHub.getShortestPath(req.params("user1"), req.params("user2")));
+		get("/path/:user1/:user2", (req, res) -> gitHub.getShortestPath(req.params("user1"), req.params("user2")));
 	}
 	
 	private static String helloWorld(String user) {
