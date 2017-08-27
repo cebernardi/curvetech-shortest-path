@@ -2,18 +2,18 @@ package curvetech.server;
 
 import static spark.Spark.*;
 
-import curvetech.GitHub;
+import curvetech.GitHubPath;
 import curvetech.source.GitHubDemoSource;
 
 public class Main {
 
-	private static GitHub gitHub;
+	private static GitHubPath gitHub;
 	
 	public static void main(String[] args) {
 		
 		GitHubDemoSource source = new GitHubDemoSource();
 		
-		gitHub = new GitHub(source);
+		gitHub = new GitHubPath(source);
 		
 		get("/hello/:user", (req, res) -> helloWorld(req.params("user")));
 		 		 
