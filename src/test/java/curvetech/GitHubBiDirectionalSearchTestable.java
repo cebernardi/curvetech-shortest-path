@@ -1,5 +1,6 @@
 package curvetech;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -53,5 +54,15 @@ public class GitHubBiDirectionalSearchTestable extends GitHubBiDirectionalSearch
 	public void addConnectionsToQueue(GitHubUser user, LinkedList<GitHubUser> users) {
 		super.addConnectionsToQueue(user, users);
 	}
+	
+	public boolean areContributorsConnected (
+			ArrayList<String> userNames, 
+			HashSet<String> setVisited,
+			HashSet<String> setToCheck, 
+			ArrayList<String> connections) {
+		return super.areContributorsConnected(userNames, setVisited, setToCheck, connections);
+	}
+	
+	
 	
 }

@@ -145,19 +145,19 @@ public class GitHubBiDirectionalSearch {
 			ArrayList<String> connections) {
 		
 		boolean isConnected = false;
-		
-		for (String userName: userNames) {
-			if (!setVisited.contains(userName)) {
-				if (setToCheck.contains(userName)) {
-					isConnected = true;
-					break;
-				} else {
-					setVisited.add(userName);
-					connections.add(userName);
-				}
-			} 
+		if (userNames != null) {
+			for (String userName: userNames) {
+				if (!setVisited.contains(userName)) {
+					if (setToCheck.contains(userName)) {
+						isConnected = true;
+						break;
+					} else {
+						setVisited.add(userName);
+						connections.add(userName);
+					}
+				} 
+			}
 		}
-		
 		
 		return isConnected;
 	}
