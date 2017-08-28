@@ -107,27 +107,15 @@ public class GitHubBiDirectionalSearch {
 			if (index < size1) {
 				if (path < 2) ++path;
 				String repoNameUser1 = reposUser1.get(index);
-				ArrayList<String> contributors = getContributorsForRepo(repoNameUser1);
-				ArrayList<String> connections = new ArrayList<>();
-				boolean isConnected = areContributorsConnected(contributors, visitedUsersFromUser1, visitedUsersFromUser2, connections);
-				if (isConnected) {
-					return path;
-				} else {
-					user1.addConnections(connections);
-				}
+				boolean collides = checkIfSearchCollides(user1, repoNameUser1, visitedUsersFromUser1, visitedUsersFromUser2);
+				if (collides) return path;
 			}
 			
 			if (index < size2) {
 				if (path < 2) ++path;
 				String repoNameUser2 = reposUser2.get(index);
-				ArrayList<String> contributors = getContributorsForRepo(repoNameUser2);
-				ArrayList<String> connections = new ArrayList<>();
-				boolean isConnected = areContributorsConnected(contributors, visitedUsersFromUser2, visitedUsersFromUser1, connections);
-				if (isConnected) {
-					return path;
-				} else {
-					user2.addConnections(connections);
-				}
+				boolean collides = checkIfSearchCollides(user2, repoNameUser2, visitedUsersFromUser2, visitedUsersFromUser1);
+				if (collides) return path;
 			}
 			
 			++index;
@@ -135,6 +123,20 @@ public class GitHubBiDirectionalSearch {
 		
 		
 		return -1;
+	}
+
+	protected boolean checkIfSearchCollides(
+			GitHubUser user1, 
+			String repoNameUser1, 
+			HashSet<String> visited, 
+			HashSet<String> toCheck) {
+		ArrayList<String> contributors = getContributorsForRepo(repoNameUser1);
+		ArrayList<String> connections = new ArrayList<>();
+		boolean isConnected = areContributorsConnected(contributors, visited, toCheck, connections);
+		if (!isConnected) {		
+			user1.addConnections(connections);
+		}
+		return isConnected;
 	}
 		
 
