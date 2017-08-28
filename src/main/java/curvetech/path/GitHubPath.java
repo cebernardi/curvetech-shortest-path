@@ -13,6 +13,9 @@ public class GitHubPath {
 	private IGitHubSource source;
 	
 	public GitHubPath(IGitHubSource source) {
+		if (source == null) {
+			throw new IllegalArgumentException();
+		}
 		this.source = source;
 	}
 	

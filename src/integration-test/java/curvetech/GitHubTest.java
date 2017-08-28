@@ -120,11 +120,5 @@ public class GitHubTest {
 		int shortest = classUnderTest.getShortestPath("user1", "user3");
 		Assert.assertEquals(2, shortest);
 	}
-	
-	@Test
-	public void testShortestPathUser1AndUser2AreEqualsReturns1() {
-		int shortest = classUnderTest.getShortestPath("user1", "user1");
-		Assert.assertEquals(1, shortest);
-	}
 
 }
