@@ -14,6 +14,11 @@ public class GitHubBiDirectionalSearch {
 	protected GitHubUser user1;
 	protected GitHubUser user2;
 	
+	protected HashSet<String> visitedUsersFromUser1 = new HashSet<>();
+	protected HashSet<String> visitedUsersFromUser2 = new HashSet<>();
+	
+	protected LinkedList<GitHubUser> usersToVisitFromUser1 = new LinkedList<>();	
+	protected LinkedList<GitHubUser> usersToVisitFromUser2 =  new LinkedList<>();
 	
 	
 	public GitHubBiDirectionalSearch(IGitHubSource source, GitHubUser user1, GitHubUser user2) {
@@ -25,21 +30,17 @@ public class GitHubBiDirectionalSearch {
 		this.user1 = user1;
 		this.user2 = user2;
 		this.source = source;
+		
+		visitedUsersFromUser1.add(user1.getUsername());		
+		visitedUsersFromUser2.add(user2.getUsername());
+			
+		usersToVisitFromUser1.add(user1);		
+		usersToVisitFromUser2.add(user2);
 	}
 
 	public int getShortestPath() {
 		
-		HashSet<String> visitedUsersFromUser1 = new HashSet<>();
-		visitedUsersFromUser1.add(user1.getUsername());
 		
-		HashSet<String> visitedUsersFromUser2 = new HashSet<>();
-		visitedUsersFromUser2.add(user2.getUsername());
-		
-		LinkedList<GitHubUser> usersToVisitFromUser1 = new LinkedList<>();	
-		usersToVisitFromUser1.add(user1);
-		
-		LinkedList<GitHubUser> usersToVisitFromUser2 =  new LinkedList<>();
-		usersToVisitFromUser2.add(user2);
 		
 		int shortestPath = getShortestPath(usersToVisitFromUser1, usersToVisitFromUser2, visitedUsersFromUser1, visitedUsersFromUser2);
 		return shortestPath;

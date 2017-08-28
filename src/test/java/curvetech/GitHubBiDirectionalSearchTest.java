@@ -2,6 +2,9 @@ package curvetech;
 
 import static org.mockito.Mockito.mock;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -65,5 +68,43 @@ public class GitHubBiDirectionalSearchTest {
 	public void testConstructorFieldUser2IsSet() {
 		GitHubUser actual = classUnderTest.getUser2();
 		Assert.assertEquals(user2, actual);
+	}
+	
+	@Test
+	public void testConstructorVisitedUsersFromUser1ContainsUser1() {
+		HashSet<String> actual = classUnderTest.getVisitedUsersFromUser1();
+		HashSet<String> expected = new HashSet<>();
+		expected.add("user1");
+		
+		Assert.assertEquals(expected, actual);		
+	}
+	
+	@Test
+	public void testConstructorVisitedUsersFromUser2ContainsUser2() {
+		HashSet<String> actual = classUnderTest.getVisitedUsersFromUser2();
+		HashSet<String> expected = new HashSet<>();
+		expected.add("user2");
+		
+		Assert.assertEquals(expected, actual);		
+	}
+	
+	@Test
+	public void testConstructorUsersToVisitFromUser1ContainsUser1() {
+		LinkedList<GitHubUser> actual = classUnderTest.getUsersToVisitFromUser1();
+		
+		LinkedList<GitHubUser> expected = new LinkedList<>();
+		expected.add(user1);
+		
+		Assert.assertEquals(expected, actual);		
+	}
+	
+	@Test
+	public void testConstructorUsersToVisitFromUser2ContainsUser2() {
+		LinkedList<GitHubUser> actual = classUnderTest.getUsersToVisitFromUser2();
+		
+		LinkedList<GitHubUser> expected = new LinkedList<>();
+		expected.add(user2);
+		
+		Assert.assertEquals(expected, actual);		
 	}
 }
