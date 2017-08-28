@@ -1,4 +1,4 @@
-package curvetech;
+package curvetech.common;
 
 import java.util.ArrayList;
 

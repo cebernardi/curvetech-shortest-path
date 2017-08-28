@@ -1,9 +1,11 @@
-package curvetech;
+package curvetech.path;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 
+import curvetech.common.GitHubRepo;
+import curvetech.common.GitHubUser;
 import curvetech.source.IGitHubSource;
 
 public class GitHubPath {

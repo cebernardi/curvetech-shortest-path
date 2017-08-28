@@ -1,14 +1,13 @@
 package curvetech;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
-
+import curvetech.path.GitHubPath;
 import curvetech.source.IGitHubSource;
 
 public class GitHubPathTest {

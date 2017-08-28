@@ -1,7 +1,7 @@
 package curvetech.source;
 
-import curvetech.GitHubRepo;
-import curvetech.GitHubUser;
+import curvetech.common.GitHubRepo;
+import curvetech.common.GitHubUser;
 
 public interface IGitHubSource {
 	public GitHubUser getUser(String username);

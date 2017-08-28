@@ -8,6 +8,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import curvetech.common.GitHubRepo;
+import curvetech.common.GitHubUser;
+import curvetech.path.GitHubPath;
 import curvetech.source.IGitHubSource;
 
 public class GitHubTest {
@@ -19,10 +22,12 @@ public class GitHubTest {
 	private GitHubUser user3;
 	private GitHubUser user4;
 	private GitHubUser user5;
+	private GitHubUser user6;
 	private GitHubRepo repo1;
 	private GitHubRepo repo2;
 	private GitHubRepo repo3;
 	private GitHubRepo repo4;
+	private GitHubRepo repo5;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -33,23 +38,27 @@ public class GitHubTest {
 		repo2 = new GitHubRepo("repo2",  "user2", "user3");
 		repo3 = new GitHubRepo("repo3",  "user3");
 		repo4 = new GitHubRepo("repo4",  "user3", "user4");
+		repo5 = new GitHubRepo("repo5", "user6");
 		
 		user1 = new GitHubUser("user1", "repo1");
 		user2 = new GitHubUser("user2", "repo2", "repo1");
 		user3 = new GitHubUser("user3", "repo3", "repo4", "repo2");
 		user4 = new GitHubUser("user4", "repo4");
 		user5 = new GitHubUser("user5");
+		user6 = new GitHubUser("user6", "repo5");
 		
 		when(source.getRepo("repo1")).thenReturn(repo1);
 		when(source.getRepo("repo2")).thenReturn(repo2);
 		when(source.getRepo("repo3")).thenReturn(repo3);
 		when(source.getRepo("repo4")).thenReturn(repo4);
+		when(source.getRepo("repo5")).thenReturn(repo5);
 		
 		when(source.getUser("user1")).thenReturn(user1);
 		when(source.getUser("user2")).thenReturn(user2);
 		when(source.getUser("user3")).thenReturn(user3);
 		when(source.getUser("user4")).thenReturn(user4);
 		when(source.getUser("user5")).thenReturn(user5);
+		when(source.getUser("user6")).thenReturn(user6);
 		
 		classUnderTest = new GitHubPath(source);
 	}
@@ -83,8 +92,14 @@ public class GitHubTest {
 	}
 	
 	@Test
-	public void testShortestPathUser1AndUser2NotConnectedReturns0() {
+	public void testShortestPathUser1AndUser2NotConnectedToAnyRepoReturns0() {
 		int shortest = classUnderTest.getShortestPath("user1", "user5");
+		Assert.assertEquals(0, shortest);
+	}
+	
+	@Test
+	public void testShortestPathUser1AndUser2NotConnectedRepoReturns0() {
+		int shortest = classUnderTest.getShortestPath("user5", "user4");
 		Assert.assertEquals(0, shortest);
 	}
 	

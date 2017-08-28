@@ -2,7 +2,7 @@ package curvetech.server;
 
 import static spark.Spark.*;
 
-import curvetech.GitHubPath;
+import curvetech.path.GitHubPath;
 import curvetech.source.GitHubDemoSource;
 
 public class Main {
