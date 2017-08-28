@@ -40,6 +40,11 @@ task integrationTest(type: Test) {
     outputs.upToDateWhen { false }
 }
 
+task execute(type:JavaExec) {
+   main = 'curvetech.server.Main'
+   classpath = sourceSets.main.runtimeClasspath
+}
+
 configure(integrationTest) {   
     group = 'verification'
     description = 'Runs the integration tests'
