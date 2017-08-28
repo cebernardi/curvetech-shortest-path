@@ -107,4 +107,13 @@ public class GitHubBiDirectionalSearchTest {
 		
 		Assert.assertEquals(expected, actual);		
 	}
+	
+	@Test
+	public void testGetShortestPathQueuesEmptyReturn0() {
+		classUnderTest.setUsersToVisitFromUser1(new LinkedList<>());
+		classUnderTest.setUsersToVisitFromUser2(new LinkedList<>());
+		
+		int actual = classUnderTest.getShortestPath();
+		Assert.assertEquals(0, actual);
+	}
 }

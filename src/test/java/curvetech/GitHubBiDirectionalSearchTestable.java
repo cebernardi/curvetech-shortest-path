@@ -42,5 +42,12 @@ public class GitHubBiDirectionalSearchTestable extends GitHubBiDirectionalSearch
 		return usersToVisitFromUser2;
 	}
 	
+	public void setUsersToVisitFromUser1(LinkedList<GitHubUser> queue) {
+		usersToVisitFromUser1 = queue;
+	}
+	
+	public void setUsersToVisitFromUser2(LinkedList<GitHubUser> queue) {
+		usersToVisitFromUser2 = queue;
+	}
 	
 }

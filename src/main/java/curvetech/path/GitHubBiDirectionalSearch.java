@@ -37,21 +37,8 @@ public class GitHubBiDirectionalSearch {
 		usersToVisitFromUser1.add(user1);		
 		usersToVisitFromUser2.add(user2);
 	}
-
-	public int getShortestPath() {
-		
-		
-		
-		int shortestPath = getShortestPath(usersToVisitFromUser1, usersToVisitFromUser2, visitedUsersFromUser1, visitedUsersFromUser2);
-		return shortestPath;
-
-	}
 	
-	protected int getShortestPath(
-			LinkedList<GitHubUser> usersToVisitFromUser1,
-			LinkedList<GitHubUser> usersToVisitFromUser2,
-			HashSet<String> visitedUsersFromUser1, 
-			HashSet<String> visitedUsersFromUser2) {
+	public int getShortestPath() {
 		
 		int path1 = 0;
 		int path2 = 0;
@@ -61,7 +48,7 @@ public class GitHubBiDirectionalSearch {
 			GitHubUser user2 = usersToVisitFromUser2.poll();
 			
 			
-			int dist = getConnectionDistance(user1, user2, visitedUsersFromUser1, visitedUsersFromUser2);
+			int dist = getConnectionDistance(user1, user2);
 			
 			if (dist > -1) {
 				return path1 + path2 + dist;
@@ -94,9 +81,7 @@ public class GitHubBiDirectionalSearch {
 
 	protected int getConnectionDistance(
 			GitHubUser user1, 
-			GitHubUser user2, 
-			HashSet<String> userSet1,
-			HashSet<String> userSet2) {
+			GitHubUser user2) {
 		
 		
 		ArrayList<String> reposUser1 = null;
@@ -126,7 +111,7 @@ public class GitHubBiDirectionalSearch {
 				String repoNameUser1 = reposUser1.get(index);
 				ArrayList<String> contributors = getContributorsForRepo(repoNameUser1);
 				ArrayList<String> connections = new ArrayList<>();
-				boolean isConnected = areContributorsConnected(contributors, userSet1, userSet2, connections);
+				boolean isConnected = areContributorsConnected(contributors, visitedUsersFromUser1, visitedUsersFromUser2, connections);
 				if (isConnected) {
 					return path;
 				} else {
@@ -139,7 +124,7 @@ public class GitHubBiDirectionalSearch {
 				String repoNameUser2 = reposUser2.get(index);
 				ArrayList<String> contributors = getContributorsForRepo(repoNameUser2);
 				ArrayList<String> connections = new ArrayList<>();
-				boolean isConnected = areContributorsConnected(contributors, userSet2, userSet1, connections);
+				boolean isConnected = areContributorsConnected(contributors, visitedUsersFromUser2, visitedUsersFromUser1, connections);
 				if (isConnected) {
 					return path;
 				} else {
