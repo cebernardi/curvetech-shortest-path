@@ -50,4 +50,8 @@ public class GitHubBiDirectionalSearchTestable extends GitHubBiDirectionalSearch
 		usersToVisitFromUser2 = queue;
 	}
 	
+	public void addConnectionsToQueue(GitHubUser user, LinkedList<GitHubUser> users) {
+		super.addConnectionsToQueue(user, users);
+	}
+	
 }

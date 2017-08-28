@@ -48,7 +48,7 @@ public class GitHubBiDirectionalSearch {
 			GitHubUser user2 = usersToVisitFromUser2.poll();
 			
 			
-			int dist = getConnectionDistance(user1, user2);
+			int dist = getUsersImmediateDistance(user1, user2);
 			
 			if (dist > -1) {
 				return path1 + path2 + dist;
@@ -56,33 +56,31 @@ public class GitHubBiDirectionalSearch {
 			
 			if (user1 != null) {
 				++path1;
-				addConnections(user1, visitedUsersFromUser1, usersToVisitFromUser1);
+				addConnectionsToQueue(user1, usersToVisitFromUser1);
 			}
 			
 			if (user2 != null) {
 				++path2;
-				addConnections(user2, visitedUsersFromUser2, usersToVisitFromUser2);
+				addConnectionsToQueue(user2, usersToVisitFromUser2);
 			}
 		}
 		
 		return 0;
 	}
 
-	protected void addConnections(GitHubUser user, HashSet<String> userSet, LinkedList<GitHubUser> users) {
-		
-		ArrayList<String> connections = user.getConnections();
-		for (String conn: connections) {
-				GitHubUser u = source.getUser(conn);
-				users.push(u);
-			
+	protected void addConnectionsToQueue(GitHubUser user, LinkedList<GitHubUser> users) {
+		if (user != null) {
+			ArrayList<String> connections = user.getConnections();
+			for (String conn: connections) {
+					GitHubUser u = source.getUser(conn);
+					if (u != null) {
+						users.push(u);		
+					}
+			}
 		}
-		
 	}
 
-	protected int getConnectionDistance(
-			GitHubUser user1, 
-			GitHubUser user2) {
-		
+	protected int getUsersImmediateDistance(GitHubUser user1, GitHubUser user2) {		
 		
 		ArrayList<String> reposUser1 = null;
 		ArrayList<String> reposUser2 = null;
@@ -140,7 +138,7 @@ public class GitHubBiDirectionalSearch {
 	}
 		
 
-	protected boolean areContributorsConnected(
+	protected boolean areContributorsConnected (
 			ArrayList<String> userNames, 
 			HashSet<String> setVisited,
 			HashSet<String> setToCheck, 
