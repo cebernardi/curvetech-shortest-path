@@ -1,4 +1,4 @@
-package curvetech;
+package curvetech.path;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

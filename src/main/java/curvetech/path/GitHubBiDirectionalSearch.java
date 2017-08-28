@@ -165,9 +165,12 @@ public class GitHubBiDirectionalSearch {
 	protected ArrayList<String> getContributorsForRepo(String repoName) {
 		
 		ArrayList<String> connections = new ArrayList<>();
-		
-		GitHubRepo repo = source.getRepo(repoName);
-		connections.addAll(repo.getContributors());
+		if (repoName != null && !repoName.isEmpty()) {
+			GitHubRepo repo = source.getRepo(repoName);
+			if (repo != null) {
+				connections.addAll(repo.getContributors());
+			}
+		}
 				
 		return connections;
 	}

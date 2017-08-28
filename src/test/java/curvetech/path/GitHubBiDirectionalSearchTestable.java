@@ -1,4 +1,4 @@
-package curvetech;
+package curvetech.path;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -63,6 +63,8 @@ public class GitHubBiDirectionalSearchTestable extends GitHubBiDirectionalSearch
 		return super.areContributorsConnected(userNames, setVisited, setToCheck, connections);
 	}
 	
-	
+	public ArrayList<String> getContributorsForRepo(String repoName) {
+		return super.getContributorsForRepo(repoName);
+	}
 	
 }
